@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parker's Consultings | Loan Application</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <nav class="nav">
+        <div class="brand">
+          <a href="https://parkersconsultings.com/">
+          <img src="img/logo.png"
+                        alt="Parker's Consulting and Ventures Pvt . Ltd Logo" class="w-10 h-10 rounded-lg object-cover" style="height: 70px; margin-right: 15px;"
+                        loading="lazy"
+                        onerror="console.error('Logo failed to load:', this.src); this.style.background='#f97316'; this.alt='Parker Logo';">
+          </a>
+          <div>
+            <div class="brand-title">Parker`s Consulting & Ventures Private Limited</div>
+            <div class="brand-sub">Corporate DSA & Loan Distribution</div>
+          </div>
+        </div>
+        <div class="nav-actions">
+          <span class="pill">Customer Delight</span>
+          <span class="pill">150+ Cities</span>
+          <span class="pill">20+ States</span>
+        </div>
+      </nav>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Apply for a loan in minutes</p>
+          <h1>India's fast-growing loan distribution partner.</h1>
+          <p class="lead">
+            Share your details once and our team will guide you to the right product,
+            fast approvals, and transparent documentation.
+          </p>
+          <div class="hero-meta">
+            <div>
+              <div class="stat">21+</div>
+              <div class="stat-label">Years of Experience</div>
+            </div>
+            <div>
+              <div class="stat">150+</div>
+              <div class="stat-label">Cities Covered</div>
+            </div>
+            <div>
+              <div class="stat">20+</div>
+              <div class="stat-label">States Presence</div>
+            </div>
+          </div>
+          <div class="note">
+            We do not charge for any of our services. If anyone demands charges, please mail us at
+            <strong>aadrikasalesops@gmail.com</strong>.
+          </div>
+        </div>
+        <div class="hero-card">
+          <h2>Quick Loan Match</h2>
+          <p>Tell us your requirement and we will connect you with the best product.</p>
+          <div class="chip-row">
+            <span>Home Loan</span>
+            <span>Business Loan</span>
+            <span>Personal Loan</span>
+            <span>Mortgage Loan</span>
+            <span>Education Loan</span>
+            <span>Car Loan</span>
+            <span>Credit Card</span>
+            <span>Balance Transfer</span>
+            <span>Working Capital CC/OD</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="section">
+        <div class="section-head">
+          <div class="title-row">
+            <h2>Loan Application</h2>
+            <button id="closeApplication" class="close-btn hidden" type="button">Close</button>
+          </div>
+          <p>Click the button to start a single application. Fields marked with * are mandatory.</p>
+        </div>
+
+        <button id="startApplication" class="start-btn" type="button">Start Loan Application</button>
+
+        <form id="loanForm" class="form hidden">
+          <div class="grid two">
+            <label>
+              Loan Type *
+              <select name="loanType" required>
+                <option value="">Select loan type</option>
+                <option>Home Loan</option>
+                <option>Business Loan</option>
+                <option>Project Loan</option>
+                <option>Mortgage Loan</option>
+                <option>Education Loan</option>
+                <option>Personal Loan</option>
+                <option>Credit Card</option>
+                <option>Car Loan</option>
+                <option>Balance Transfer</option>
+                <option>Working Capital CC/OD</option>
+                <option>Insurance Policy</option>
+                <option>Automobile Loan</option>
+              </select>
+            </label>
+            <label>
+              Required Amount (INR) *
+              <input name="amount" type="number" min="15000" step="1000" placeholder="Minimum 15000" required />
+            </label>
+          </div>
+
+          <div class="grid three">
+            <label>
+              Purpose / Requirement *
+              <input name="purpose" type="text" placeholder="Home purchase / business expansion" required />
+            </label>
+            <label>
+              Preferred Tenure (Years)
+              <input name="tenure" type="number" min="1" max="30" placeholder="e.g. 10" />
+            </label>
+            <label>
+              Resident City *
+              <input name="city" type="text" placeholder="City" required />
+            </label>
+          </div>
+
+          <div class="applicant-card" data-index="1">
+            <div class="card-head">
+              <h3>Applicant</h3>
+              <span class="tag">Single Application</span>
+            </div>
+
+            <div class="grid three">
+              <label>
+                Full Name *
+                <input name="fullName" type="text" placeholder="Applicant name" required />
+              </label>
+              <label>
+                Date of Birth *
+                <input name="dob" type="date" required />
+              </label>
+              <label>
+                Phone Number *
+                <input name="phone" type="tel" placeholder="10-digit mobile" required />
+              </label>
+            </div>
+
+            <div class="grid three">
+              <label>
+                Email Address *
+                <input name="email" type="email" placeholder="name@email.com" required />
+              </label>
+              <label>
+                Profession *
+                <input name="profession" type="text" placeholder="Salaried / Self-employed" required />
+              </label>
+              <label>
+                Total Work Experience (Years)
+                <input name="experience" type="number" min="0" max="40" placeholder="e.g. 6" />
+              </label>
+            </div>
+
+            <div class="grid two">
+              <label>
+                Current Address *
+                <input name="address" type="text" placeholder="Street, area" required />
+              </label>
+              <label>
+                State *
+                <input name="state" type="text" placeholder="State" required />
+              </label>
+            </div>
+
+            <div class="grid three">
+              <label>
+                PIN Code *
+                <input name="pin" type="text" placeholder="Postal code" required />
+              </label>
+              <label>
+                Aadhar Number *
+                <input name="aadhar" type="text" placeholder="XXXX-XXXX-XXXX" required />
+              </label>
+              <label>
+                PAN Number *
+                <input name="pan" type="text" placeholder="ABCDE1234F" required />
+              </label>
+            </div>
+
+            <div class="upload-grid">
+              <label class="upload">
+                Aadhar Attachment (PDF/JPG) *
+                <input name="aadhar_file" type="file" accept="application/pdf,image/*" required />
+              </label>
+              <label class="upload">
+                PAN Attachment (PDF/JPG) *
+                <input name="pan_file" type="file" accept="application/pdf,image/*" required />
+              </label>
+              <label class="upload">
+                3 Month Salary Slip (Multiple PDF) *
+                <input name="salary_slip" type="file" accept="application/pdf" multiple required />
+              </label>
+              <label class="upload">
+                6 Month Banking (Multiple PDF) *
+                <input name="bank_statement" type="file" accept="application/pdf" multiple required />
+              </label>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <label>
+              Preferred Branch / City
+              <input name="branch" type="text" placeholder="Nearest branch" />
+            </label>
+            <label>
+              Additional Notes
+              <input name="notes" type="text" placeholder="Any additional details" />
+            </label>
+          </div>
+
+          <div class="cta">
+            <button type="submit">Submit Application</button>
+            <p class="small">By submitting, you agree to be contacted by Parker's Consultings.</p>
+          </div>
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="section info">
+        <div class="section-head">
+          <h2>Why Choose Us</h2>
+          <p>Fast approvals, minimal documentation, and transparent support at every step.</p>
+        </div>
+        <div>
+          <div class="grid three">
+          <div class="info-card">
+            <h4>Quick &<br />Hassle-Free</h4>
+            <p><strong>Dedicated advisors</strong> guide you from enquiry to disbursal with clear timelines.</p>
+          </div>
+          <div class="info-card">
+            <h4>Nationwide<br />Presence</h4>
+            <p><strong>150+ cities covered</strong> with on-ground support and local branch reach.</p>
+          </div>
+          <div class="info-card">
+            <h4>Trusted<br />Partners</h4>
+            <p><strong>Strong bank & NBFC network</strong> to match the right product quickly.</p>
+          </div>
+          </div>
+          <div class="grid three">
+          <div class="info-card">
+            <h4>Transparent<br />Process</h4>
+            <p><strong>No hidden charges</strong> and full visibility on eligibility and documentation.</p>
+          </div>
+          <div class="info-card">
+            <h4>Faster<br />Eligibility Check</h4>
+            <p><strong>Single form</strong> for multiple products to reduce back-and-forth.</p>
+          </div>
+          <div class="info-card">
+            <h4>Post-Approval<br />Support</h4>
+            <p><strong>Dedicated support</strong> until disbursal and account activation.</p>
+          </div>
+          </div>
+        </div>
+  
+      </section>
+
+      <section class="section about">
+        <div class="section-head">
+          <h2>About Us</h2>
+          <p>
+            Parker's Consultings is a corporate DSA and loan distribution partner with a
+            nationwide footprint. Our focus is to simplify lending by pairing each customer
+            with the most suitable product, backed by transparent guidance and end-to-end support.
+          </p>
+        </div>
+        <div class="grid two">
+          <div class="info-card">
+            <h4>Customer-First<br />Approach</h4>
+            <p>We align eligibility, documentation, and product choice so your time is saved.</p>
+          </div>
+          <div class="info-card">
+            <h4>Experienced<br />Team</h4>
+            <p>Over two decades of market expertise with a focus on responsible lending.</p>
+          </div>
+          <div class="info-card">
+            <h4>Wide Product<br />Range</h4>
+            <p>Home, business, personal, education, and mortgage options through trusted partners.</p>
+          </div>
+          <div class="info-card">
+            <h4>Transparent<br />Guidance</h4>
+            <p>Clear timelines, document checklists, and proactive updates throughout.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact">
+        <div>
+          <h2>Contact Parker's Consultings</h2>
+          <p>306,307,308 Apollo Square, Race Course Road, Janjeerwala Square, Indore-452003 (M.P)</p>
+          <div class="contact-list">
+            <span>Phone: +91 8359077000 | Toll Free: 1800 1200 130</span>
+            <span>Email: aadrikasalesops@gmail.com</span>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h3>Get a Call Back</h3>
+          <form id="callbackForm" class="callback-form" novalidate>
+            <label>
+              Your Name
+              <input name="callback_name" type="text" placeholder="Full name" required />
+            </label>
+            <label>
+              Email
+              <input name="callback_email" type="email" placeholder="name@email.com" required />
+            </label>
+            <label>
+              Phone Number
+              <input name="callback_phone" type="tel" placeholder="10-digit number" required />
+            </label>
+            <button type="submit">Request Callback</button>
+            <div id="callbackStatus" class="form-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <img src="img/logo.png"
+          alt="Parker's Logo" class="footer-logo" loading="lazy" />
+        <div>
+          <div class="footer-title">Parker`s Consulting & Ventures Private Limited</div>
+          <div class="footer-sub">All Rights Reserved</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
