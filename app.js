@@ -2,10 +2,15 @@ const startButton = document.getElementById('startApplication');
 const loanForm = document.getElementById('loanForm');
 const closeButton = document.getElementById('closeApplication');
 const formStatus = document.getElementById('formStatus');
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbySdK-RXg5zidUU3-oCWlp9ZRQs73wM_roAXq-QZFjTN1h_KrYVror1Q-KuSi5eCDff/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyuVGi0sgCD-HLFLD0DEbISywSegtroVkRt67v9Yqqun4kLIQzsmxHbn3BwDBp1nHNc/exec';
 const CALLBACK_URL = 'https://script.google.com/macros/s/AKfycbwEVzoTwDIgmMadGhOpZWGwI0RQkR_gt9qQKs_DzxpmA0KFoQbHzJlGILpaI__CTA8gbg/exec';
 const callbackForm = document.getElementById('callbackForm');
 const callbackStatus = document.getElementById('callbackStatus');
+const MAX_TOTAL_FILE_MB = 20;
+const MAX_SINGLE_FILE_MB = 8;
+const MAX_TOTAL_FILE_BYTES = MAX_TOTAL_FILE_MB * 1024 * 1024;
+const MAX_SINGLE_FILE_BYTES = MAX_SINGLE_FILE_MB * 1024 * 1024;
+const REQUEST_TIMEOUT_MS = 45000;
 
 if (startButton && loanForm && closeButton) {
   startButton.addEventListener('click', () => {
@@ -39,11 +44,11 @@ if (startButton && loanForm && closeButton) {
 
     try {
       const files = await collectFiles(formData);
-      await fetch(WEB_APP_URL, {
+      await fetchWithTimeout(WEB_APP_URL, {
         method: 'POST',
         mode: 'no-cors',
         body: JSON.stringify({ data, files })
-      });
+      }, REQUEST_TIMEOUT_MS);
 
       if (formStatus) {
         formStatus.className = 'form-status success';
@@ -64,9 +69,20 @@ if (startButton && loanForm && closeButton) {
 function collectFiles(formData) {
   const fileGroups = {};
   const filePromises = [];
+  const sizeIssues = [];
+  let totalBytes = 0;
 
   formData.forEach((value, key) => {
     if (!(value instanceof File) || !value.name) return;
+    if (value.size > MAX_SINGLE_FILE_BYTES) {
+      sizeIssues.push(`${value.name} exceeds ${MAX_SINGLE_FILE_MB} MB.`);
+      return;
+    }
+    totalBytes += value.size;
+    if (totalBytes > MAX_TOTAL_FILE_BYTES) {
+      sizeIssues.push(`Total attachments exceed ${MAX_TOTAL_FILE_MB} MB.`);
+      return;
+    }
     if (!fileGroups[key]) fileGroups[key] = [];
     filePromises.push(
       fileToBase64(value).then((fileObj) => {
@@ -74,6 +90,10 @@ function collectFiles(formData) {
       })
     );
   });
+
+  if (sizeIssues.length) {
+    return Promise.reject(new Error(sizeIssues.join(' ')));
+  }
 
   return Promise.all(filePromises).then(() => fileGroups);
 }
@@ -90,6 +110,24 @@ function fileToBase64(file) {
       });
     };
     reader.readAsDataURL(file);
+  });
+}
+
+function fetchWithTimeout(url, options, timeoutMs) {
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error('Request timed out. Please try again.'));
+    }, timeoutMs);
+
+    fetch(url, options)
+      .then((response) => {
+        clearTimeout(timeoutId);
+        resolve(response);
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        reject(error);
+      });
   });
 }
 
